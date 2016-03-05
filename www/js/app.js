@@ -1,25 +1,24 @@
-// Ionic Starter App
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-datepicker', 'ionic-timepicker'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker'])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform,$ionicHistory) {
         $ionicPlatform.ready(function () {
-            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-            // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
 
             }
             if (window.StatusBar) {
-                // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
         });
+        $ionicPlatform.registerBackButtonAction(function () {
+            if($ionicHistory.currentStateName()=='app.loginpage'||$ionicHistory.backTitle()=='登录'){
+                ionic.Platform.exitApp();
+            }else{
+                $ionicHistory.goBack();
+            }
+        },101)
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
@@ -60,7 +59,14 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-datepicker', '
                     }
                 }
             })
-
+            .state('app.about', {
+                url: '/about',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/about.html'
+                    }
+                }
+            })
             .state('app.loginpage', {
                 url: '/loginpage',
                 views: {

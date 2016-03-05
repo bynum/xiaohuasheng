@@ -1,161 +1,160 @@
 <ion-modal-view>
 
-  <form ng-submit="doLogin()">
-    <ion-header-bar>
-      <h1 class="title positive">{{loginTitle}}</h1>
-      <div class="buttons">
-        <!--<button class="button button-clear" ng-click="closeLogin()">关闭</button>-->
-        <button class="button button-clear button-positive" ng-click="closeLogin()" type="submit">确定</button>
-      </div>
-    </ion-header-bar>
-    <ion-content scroll='false'>
-      <ion-slide-box style="height:100%" show-pager='false' on-slide-changed="slideChanged()">
-        <ion-slide style="height:100%">
-          <ion-scroll class="list" style="height:100%">
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.tem" />
-              </label>
-              温度
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.wind" />
-              </label>
-              风场
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.point" />
-              </label>
-              站点
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.name" />
-              </label>
-              站名
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.id" />
-              </label>
-              站号
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.prs" />
-              </label>
-              气压
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.dpt" />
-              </label>
-              露点
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.rh" />
-              </label>
-              湿度
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.pre1h" />
-              </label>
-              1h雨量
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.gst" />
-              </label>
-              地面温度
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.vis" />
-              </label>
-              能见度
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.prs24h" />
-              </label>
-              24h变压
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.prs3h" />
-              </label>
-              3h变压
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.tem24h" />
-              </label>
-              24h变温
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.temmax24" />
-              </label>
-              24h最高温度
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.temmin24" />
-              </label>
-              24h最低温度
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData7.pre24h" />
-              </label>
-              24h雨量
-            </li>
-          </ion-scroll>
-        </ion-slide>
-        <ion-slide style="height:100%">
-          <ion-scroll style="height:100%" class="list">
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData2.r1h" />
-              </label>
-              1h雨量
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData2.id2" />
-              </label>
-              站号
-            </li>
-            <li class="item item-checkbox">
-              <label class="checkbox">
-                <input type="checkbox" ng-model="loginData.hourData2.name2" />
-              </label>
-              站名
-            </li>
-          </ion-scroll>
-        </ion-slide>
-        <ion-slide style="height:100%">
-          <ion-toggle ng-model="loginData.radarData.radarShown" toggle-class="toggle-positive">雷达</ion-toggle>
-          <ion-scroll delegate-handle="radarScroll" style="height:100%" class="list" on-scroll="getScrollPosition()">
-            <ion-refresher pulling-text="下拉刷新。。。" on-refresh="doRefreshRadarList()">
-            </ion-refresher>
-            <ion-radio class="item" ng-repeat="radar in radarList" ng-model="loginData.radarData.radarModel" ng-value="radar">{{radar}}</ion-radio>
-            <ion-item>End!</ion-item>
-          </ion-scroll>
-          <div class="float-button" ng-show="sttButton" ng-click="scrollToTop()">
-            <span class="height-fix">
+    <form ng-submit="doPhysics()">
+        <ion-header-bar>
+            <h1 class="title positive">{{physicsTitle}}</h1>
+            <div class="buttons">
+                <!--<button class="button button-clear" ng-click="closePhysics()">关闭</button>-->
+                <button class="button button-clear button-positive" ng-click="closePhysics()" type="submit">确定</button>
+            </div>
+        </ion-header-bar>
+        <ion-content scroll='false'>
+            <ion-slide-box style="height:100%" show-pager='false' on-slide-changed="slideChanged()">
+                <ion-slide style="height:100%">
+                    <ion-scroll class="list" style="height:100%">
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.tem" />
+                            </label>
+                            温度
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.wind" />
+                            </label>
+                            风场
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.point" />
+                            </label>
+                            站点
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.name" />
+                            </label>
+                            站名
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.id" />
+                            </label>
+                            站号
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.prs" />
+                            </label>
+                            气压
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.dpt" />
+                            </label>
+                            露点
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.rh" />
+                            </label>
+                            湿度
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.pre1h" />
+                            </label>
+                            1h雨量
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.gst" />
+                            </label>
+                            地面温度
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.vis" />
+                            </label>
+                            能见度
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.prs24h" />
+                            </label>
+                            24h变压
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.prs3h" />
+                            </label>
+                            3h变压
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.tem24h" />
+                            </label>
+                            24h变温
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.temmax24" />
+                            </label>
+                            24h最高温度
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.temmin24" />
+                            </label>
+                            24h最低温度
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData7.pre24h" />
+                            </label>
+                            24h雨量
+                        </li>
+                    </ion-scroll>
+                </ion-slide>
+                <ion-slide style="height:100%">
+                    <ion-scroll style="height:100%" class="list">
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData2.r1h" />
+                            </label>
+                            1h雨量
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData2.id2" />
+                            </label>
+                            站号
+                        </li>
+                        <li class="item item-checkbox">
+                            <label class="checkbox">
+                                <input type="checkbox" ng-model="physicsData.hourData2.name2" />
+                            </label>
+                            站名
+                        </li>
+                    </ion-scroll>
+                </ion-slide>
+                <ion-slide style="height:100%">
+                    <ion-toggle ng-model="physicsData.radarData.radarShown" toggle-class="toggle-positive">雷达</ion-toggle>
+                    <ion-scroll delegate-handle="radarScroll" style="height:100%" class="list" on-scroll="getScrollPosition()">
+                        <ion-refresher pulling-text="下拉刷新。。。" on-refresh="doRefreshRadarList()">
+                        </ion-refresher>
+                        <ion-radio class="item" ng-repeat="radar in radarList" ng-model="physicsData.radarData.radarModel" ng-value="radar">{{radar}}</ion-radio>
+                        <ion-item>End!</ion-item>
+                    </ion-scroll>
+                    <div class="float-button" ng-show="sttButton" ng-click="scrollToTop()">
+                        <span class="height-fix">
                <a class="content">
                   <i class="ion-ios-arrow-up"> </i>
                </a>
            </span>
-          </div>
-        </ion-slide>
-      </ion-slide-box>
-
-    </ion-content>
-  </form>
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+        </ion-content>
+    </form>
 </ion-modal-view>

@@ -1,4 +1,4 @@
-angular.module('starter.controllers', ["leaflet-directive"])
+angular.module('starter.controllers', ['leaflet-directive'])
 
     .controller('AppCtrl', function ($scope, $rootScope) {
 
@@ -12,14 +12,14 @@ angular.module('starter.controllers', ["leaflet-directive"])
             return localStorage.getItem('user');
         }
         $scope.$watch(change, function () {
-            console.log('changed');
+            //console.log('changed');
             $scope.user = localStorage.getItem('user');
         })
     })
 
     .controller('LoginpageCtrl', function ($scope, $timeout, $state) {
-        $scope.$on('$ionicView.loaded',function() {
-            if(localStorage.getItem('user')){
+        $scope.$on('$ionicView.loaded', function () {
+            if (localStorage.getItem('user')) {
                 $state.go('app.mainpage');
             }
         })
@@ -27,7 +27,6 @@ angular.module('starter.controllers', ["leaflet-directive"])
         $scope.loginData = {};
         // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
             if ($scope.loginData.username == 'sail' && $scope.loginData.password == '17c01') {
                 // Simulate a login delay. Remove this and replace with your login
                 // code if using a login system
@@ -44,7 +43,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
 
     .controller('MainpageCtrl', function ($scope, $state) {
         $scope.username = localStorage.getItem('user');
-        console.log($scope.username);
+        //console.log($scope.username);
         $scope.logout = function () {
             localStorage.removeItem('user');
             $state.go('app.loginpage');
@@ -64,6 +63,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
             '$timeout',
             '$ionicSlideBoxDelegate',
             '$ionicScrollDelegate',
+            'Common',
             function (
                 $scope,
                 $ionicPopup,
@@ -74,7 +74,8 @@ angular.module('starter.controllers', ["leaflet-directive"])
                 $ionicLoading,
                 $timeout,
                 $ionicSlideBoxDelegate,
-                $ionicScrollDelegate) {
+                $ionicScrollDelegate,
+                Common) {
                 /*******雷达选择页面 返回页面顶部业务********* */
                 $scope.sttButton = false;
                 $scope.scrollToTop = function () { //ng-click for back to top button
@@ -96,20 +97,20 @@ angular.module('starter.controllers', ["leaflet-directive"])
 
                 var currentRadarModel = "";
                 var radarLayer = null;
-                $scope.loginTitle = "国家站";
+                $scope.physicsTitle = "国家站";
                 $scope.slideChanged = function () {
                     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
                     switch ($scope.currSlide) {
                         case 0:
                             $scope.sttButton = false;
-                            $scope.loginTitle = "国家站";
+                            $scope.physicsTitle = "国家站";
                             break;
                         case 1:
                             $scope.sttButton = false;
-                            $scope.loginTitle = "区域站";
+                            $scope.physicsTitle = "区域站";
                             break;
                         case 2:
-                            $scope.loginTitle = "雷达";
+                            $scope.physicsTitle = "雷达";
                             var moveData = $ionicScrollDelegate.$getByHandle('radarScroll').getScrollPosition().top;
                             if (moveData > 150) {
                                 $scope.sttButton = true;
@@ -129,8 +130,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                 $scope.datetime = {};//纪录当前时间 date：yyyyMMdd 和hour：hh
                 $scope.radarList = [];//纪录雷达的列表
                 /////////////////////////////////
-                // Form data for the login modal
-                $scope.loginData = {
+                $scope.physicsData = {
                     hourData7: {
                         tem: true,
                         rh: false,
@@ -161,38 +161,38 @@ angular.module('starter.controllers', ["leaflet-directive"])
                     }
                 };
    
-                // Create the login modal that we will use later
+                // Create the physics modal that we will use later
                 $ionicModal.fromTemplateUrl('templates/physics.html', {
                     scope: $scope,
                 }).then(function (modal) {
                     $scope.modal = modal;
                 });
 
-                // Triggered in the login modal to close it
-                $scope.closeLogin = function () {
+                // Triggered in the physics modal to close it
+                $scope.closePhysics = function () {
                     $scope.modal.hide();
                 };
 
-                // Open the login modal
-                $scope.login = function () {
+                // Open the physics modal
+                $scope.physics = function (event) {
                     $scope.modal.show();
+                    event.stopPropagation();//阻止事件冒泡
                 };
                 var isRadarShown = true;
-                // Perform the login action when the user submits the login form
-                $scope.doLogin = function () {
-                    console.log($scope.loginData.radarData);
+                // Perform the physics action when the user submits the physics form
+                $scope.doPhysics = function () {
                     for (var i = 0; i < hourData7Markers.length; i++) {
-                        hourData7Markers[i].options.icon.changeHourData7DisplayStatus($scope.loginData.hourData7);
+                        hourData7Markers[i].options.icon.changeHourData7DisplayStatus($scope.physicsData.hourData7);
                     }
                     leafletData.getMap('mymap').then(function (map) {
-                        if ($scope.loginData.radarData.radarShown) {
+                        if ($scope.physicsData.radarData.radarShown) {
                             if (!isRadarShown) {
-                                radarLayer = addRadarImg(map, $scope.loginData.radarData.radarModel);
+                                radarLayer = addRadarImg(map, $scope.physicsData.radarData.radarModel);
                             }
                             else {
-                                if ($scope.loginData.radarData.radarModel != currentRadarModel) {
+                                if ($scope.physicsData.radarData.radarModel != currentRadarModel) {
                                     map.removeLayer(radarLayer);
-                                    radarLayer = addRadarImg(map, $scope.loginData.radarData.radarModel);
+                                    radarLayer = addRadarImg(map, $scope.physicsData.radarData.radarModel);
                                 }
                             }
                         }
@@ -201,7 +201,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                                 map.removeLayer(radarLayer);
                             }
                         }
-                        isRadarShown = $scope.loginData.radarData.radarShown;
+                        isRadarShown = $scope.physicsData.radarData.radarShown;
                         drawHourData2(map, $scope.hourData2Obj);
                     })
                 };
@@ -245,10 +245,8 @@ angular.module('starter.controllers', ["leaflet-directive"])
                 };
                 var datePickerCallbackPopup = function (val) {
                     if (typeof (val) === 'undefined') {
-                        console.log('No date selected');
                     } else {
                         $scope.datepickerObjectPopup.inputDate = val;
-                        console.log('Selected date is : ', val)
                         var dateStr = val.Format("yyyyMMdd");
                         if (dateStr != $scope.datetime.date/*localStorage.getItem('date')*/) {
                             $scope.datetime.date = dateStr;
@@ -299,7 +297,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                                             pre24h: data.DS[i].PRE_24h,
                                             windNum: parseInt((data.DS[i].WIN_S_Avg_2mi - 0.01) / 2),
                                             windDirection: data.DS[i].WIN_D_Avg_2mi,
-                                            hourData7: $scope.loginData.hourData7
+                                            hourData7: $scope.physicsData.hourData7
                                         }
                                         );
                                     var marker = L.marker([data.DS[i].Lat, data.DS[i].Lon], { icon: icon });
@@ -327,7 +325,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                     if (hourData2Layer != null) {
                         mapid.removeLayer(hourData2Layer);
                     }
-                    if ($scope.loginData.hourData2.r1h == false && $scope.loginData.hourData2.name2 == false && $scope.loginData.hourData2.id2 == false) {
+                    if ($scope.physicsData.hourData2.r1h == false && $scope.physicsData.hourData2.name2 == false && $scope.physicsData.hourData2.id2 == false) {
                         $ionicLoading.hide();
                         return;
                     }
@@ -345,15 +343,15 @@ angular.module('starter.controllers', ["leaflet-directive"])
                                 if (params.bounds.contains([lat, lon])) {
                                     var dot = canvasOverlay._map.latLngToContainerPoint([lat, lon]);
                                     ctx.font = "12px Arial";
-                                    if ($scope.loginData.hourData2.r1h) {
-                                        ctx.fillStyle = getColorByRain(pre1h);
+                                    if ($scope.physicsData.hourData2.r1h) {
+                                        ctx.fillStyle = Common.getColorByRain(pre1h);
                                         ctx.fillText(data.DS[i].PRE_1h, dot.x, dot.y);
                                     }
-                                    if ($scope.loginData.hourData2.name2) {
+                                    if ($scope.physicsData.hourData2.name2) {
                                         ctx.fillStyle = 'black';
                                         ctx.fillText(data.DS[i].Station_Name, dot.x, dot.y - 15);
                                     }
-                                    if ($scope.loginData.hourData2.id2) {
+                                    if ($scope.physicsData.hourData2.id2) {
                                         ctx.fillStyle = 'black';
                                         ctx.fillText(data.DS[i].Station_ID_C, dot.x, dot.y + 15);
                                     }
@@ -377,11 +375,9 @@ angular.module('starter.controllers', ["leaflet-directive"])
                 };
                 function timePicker24Callback(val) {
                     if (typeof (val) === 'undefined') {
-                        //console.log('Time not selected');
                     } else {
                         $scope.timePickerObject24Hour.inputEpochTime = val;
                         var selectedTime = new Date(val * 1000);
-                        //console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), ':', selectedTime.getUTCMinutes(), 'in UTC');
                         var hour = selectedTime.getUTCHours();
                         var hourStr = hour.toString();
                         if (hour < 10) {
@@ -443,9 +439,9 @@ angular.module('starter.controllers', ["leaflet-directive"])
                         }
                     })
                         .success(function (data) {
-                            $scope.loginData.radarData.radarModel = data.radarlist[0];//纪录当前选中的雷达图片的时间
-                            currentRadarModel = $scope.loginData.radarData.radarModel;
-                            $scope.radarList = data.radarlist;
+                            $scope.physicsData.radarData.radarModel = data.radarlist[0];//纪录当前选中的雷达图片的时间
+                            currentRadarModel = $scope.physicsData.radarData.radarModel;
+                            $scope.radarList = data.radarlist.slice(0,100);
                         })
                         .error(function (err) { })
                         .finally(function () {
@@ -482,9 +478,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                     var day = parseInt($scope.datetime.date.substr(6, 2));
                     var hour = parseInt($scope.datetime.hour);
                     var dateNew = new Date(year, month - 1, day, hour);
-                    console.log(dateNew);
                     dateNew.AddHours(hourDelta);
-                    console.log(dateNew);
                     $scope.datepickerObjectPopup.inputDate = dateNew;
                     $scope.timePickerObject24Hour.inputEpochTime = dateNew.getHours() * 3600 + new Date().getMinutes() * 60;
                     $scope.datetime.date = dateNew.Format('yyyyMMdd');
@@ -521,25 +515,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                     var date = new Date();
                     return date.Format("yyyyMMddhh");
                 }
-                function getColorByRain(rain) {
-                    var color = 'rgba(0,200,0,1)';
-                    if (rain > 0 && rain < 10) {
-
-                    } else if (rain >= 10 && rain < 25) {
-                        color = 'rgba(0,128,0,1)';
-                    } else if (rain >= 25 && rain < 50) {
-                        color = 'rgba(99,184,249,1)';
-                    } else if (rain >= 50 && rain < 100) {
-                        color = 'rgba(0,0,254,1)';
-                    } else if (rain >= 100 && rain < 200) {
-                        color = 'rgba(243,5,238,1)';
-                    } else if (rain >= 200 && rain < 9000) {
-                        color = 'rgba(129,0,64,1)';
-                    }
-                    return color;
-                }
                 leafletData.getMap('mymap').then(function (map) {
-
                     $ionicLoading.show({
                         template: '加载中。。。',
                         animation: 'fade-in',
@@ -581,7 +557,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                                         pre24h: data.DS[i].PRE_24h,
                                         windNum: parseInt((data.DS[i].WIN_S_Avg_2mi - 0.01) / 2),
                                         windDirection: data.DS[i].WIN_D_Avg_2mi,
-                                        hourData7: $scope.loginData.hourData7
+                                        hourData7: $scope.physicsData.hourData7
                                     }
                                     );
                                 var marker = L.marker([data.DS[i].Lat, data.DS[i].Lon], { icon: icon });
@@ -595,9 +571,9 @@ angular.module('starter.controllers', ["leaflet-directive"])
                         }
                     })
                         .success(function (data) {
-                            $scope.loginData.radarData.radarModel = data.radarlist[0];//纪录当前选中的雷达图片的时间
-                            $scope.radarList = data.radarlist;
-                            radarLayer = addRadarImg(map, $scope.loginData.radarData.radarModel);
+                            $scope.physicsData.radarData.radarModel = data.radarlist[0];//纪录当前选中的雷达图片的时间
+                            $scope.radarList = data.radarlist.slice(0,100);
+                            radarLayer = addRadarImg(map, $scope.physicsData.radarData.radarModel);
 
                         }).error(function (err) { });
                     $http.get("http://222.85.131.129:1081/zdz", {
@@ -623,7 +599,7 @@ angular.module('starter.controllers', ["leaflet-directive"])
                                         var lat = parseFloat(data.DS[i].Lat)
                                         if (params.bounds.contains([lat, lon])) {
                                             var dot = canvasOverlay._map.latLngToContainerPoint([lat, lon]);
-                                            ctx.fillStyle = getColorByRain(pre1h);
+                                            ctx.fillStyle = Common.getColorByRain(pre1h);
                                             ctx.font = "12pt Arial";
                                             ctx.fillText(data.DS[i].PRE_1h, dot.x, dot.y);
                                         }
