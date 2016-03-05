@@ -1,0 +1,212 @@
+/* Empty. Add your own CSS if you like */
+/***ScrollButton CSS***/
+.float-button {
+background-color:#303f9f;
+  opacity: 0.9;
+  color: white;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  /*border-radius:15% 0 0 0;*/
+  width: 30px;
+  padding: 25px;
+  font-size: 40px;
+  background: red;
+  position: fixed;
+  bottom: 50px; /* Adjust height */
+  right: 0px; /* Adjust position */
+  z-index: 1000;
+}
+
+.float-button .height_fix {
+  margin-top: 100%;
+}
+
+.float-button .content {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-top: -20px; 
+  color: white;
+}
+/***ScrollButton CSS***/
+.scroll{height: 100%;}/***使leaflet占满整个ion－content**/
+.leaflet-marker-icon .icon-text-tem {
+	position: absolute;
+	top: 30px;
+	left: 20px;
+	font-size: 12px;
+	color: red;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-id {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 12px;
+	color: black;
+	/*width: 50px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-name {
+	position: absolute;
+	top: 20px;
+	left: -20px;
+	font-size: 12px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-prs {
+	position: absolute;
+	top: 40px;
+	left: 20px;
+	font-size: 12px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-dpt {
+	position: absolute;
+	top: 30px;
+	left: -20px;
+	font-size: 12px;
+	color: red;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-rH {
+	position: absolute;
+	top: 40px;
+	left: 0px;
+	font-size: 12px;
+	color: green;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-pre1h {
+	position: absolute;
+	top: 50px;
+	left: 20px;
+	font-size: 12px;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-gst {
+	position: absolute;
+	top: 40px;
+	left: -20px;
+	font-size: 12px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-vis {
+	position: absolute;
+	top: 10px;
+	left: 20px;
+	font-size: 12px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-prs24h {
+	position: absolute;
+	top: 10px;
+	left: 0px;
+	font-size: 12px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-prs3h {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	font-size: 12px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-tem24h {
+	position: absolute;
+	top: 30px;
+	left: -20px;
+	font-size: 12px;
+	color: red;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-temmax24h {
+	position: absolute;
+	top: 40px;
+	left: -20px;
+	font-size: 12px;
+	color: red;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-temmin24h {
+	position: absolute;
+	top: 50px;
+	left: -20px;
+	font-size: 12px;
+	color: red;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-pre24h {
+	position: absolute;
+	top: 10px;
+	left: -20px;
+	font-size: 12px;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-point {
+	position: absolute;
+	top: 10px;
+	left: 6px;
+	font-size: 30px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-r1h {
+	position: absolute;
+	top: 30px;
+	left: 10px;
+	font-size: 10px;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-id2 {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-size: 10px;
+	color: black;
+	/*width: 50px;*/
+	/*text-align: center;*/
+}
+.leaflet-marker-icon .icon-text-name2 {
+	position: absolute;
+	top: 20px;
+	left: -20px;
+	font-size: 10px;
+	color: black;
+	/*width: 25px;*/
+	/*text-align: center;*/
+}
+.popup-body {
+    overflow: visible;
+}
+
+.contact a {
+    font-size: 14px;
+    white-space: normal;
+}

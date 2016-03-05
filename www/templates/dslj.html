@@ -1,0 +1,30 @@
+<ion-view view-title=''>
+    <ion-nav-buttons side="right">
+        <ionic-datepicker input-obj="datepickerObjectPopup">
+            <button id="btnDatePicker" style="font-weight:bold;margin-top:0px;" class="button button-clear"> {{datepickerObjectPopup.inputDate | date:'yyyy-MM-dd'}}
+            </button>
+        </ionic-datepicker>
+        <ionic-timepicker input-obj="timePickerObject24Hour">
+            <button id='btnTimePicker' style="margin-top:0px;margin-left:20px;" class="button button-clear overflowShow">
+                <standard-time-no-meridian etime='timePickerObject24Hour.inputEpochTime'></standard-time-no-meridian>
+                <button>
+        </ionic-timepicker>
+        <button class="button button-clear"></button>
+    </ion-nav-buttons>
+    <ion-content data-tap-disabled="true" scroll='false'>
+        <div class="button-bar positive">
+
+        </div>
+        <leaflet style="height:100%;width:100%;" id="mymap" lf-center="guizhou" layers="layers" geojson="geojson"
+        defaults="defaults"></leaflet>
+        <div class="bar bar-footer">
+            <div class="button-bar">
+                <button class="button button-clear button-positive icon ion-arrow-left-c" ng-click="doHourChange(-1)"></button>
+                <button class="button button-clear button-positive icon ion-arrow-right-c" ng-click="doHourChange(1)"></button>
+                <button class="button button-clear button-positive icon ion-refresh" ng-click="doRefresh()"></button>
+                <button class="button button-clear button-positive icon ion-location" ng-click="centerMap()"></button>
+                <button class="button button-clear button-positive icon ion-navicon-round" ng-click="login()"></button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,15 @@
+<ion-view view-title="主页">
+    <ion-content>
+        <h2>当前用户：{{username}}</h2>
+        <div class="list card">
+            <a href="#/app/dslj" class="item item-icon-left">
+                <i class="icon positive ion-ios-thunderstorm-outline"></i> 实况天气
+            </a>
+            <a href="#/app/forecast" class="item item-icon-left">
+                <i class="icon positive ion-ios-partlysunny-outline"></i> 数值预报
+            </a>
+        </div>
+        <button class="button button-block button-assertive" ng-click="logout()">退出登录</button>
+
+    </ion-content>
+</ion-view>
