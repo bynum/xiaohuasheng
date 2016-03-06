@@ -1,5 +1,5 @@
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker','morphCarousel',,'ionic-pullup'])
 
     .run(function ($ionicPlatform,$ionicHistory) {
         $ionicPlatform.ready(function () {
@@ -13,7 +13,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
             }
         });
         $ionicPlatform.registerBackButtonAction(function () {
-            if($ionicHistory.currentStateName()=='app.loginpage'||$ionicHistory.backTitle()=='登录'){
+            if($ionicHistory.currentStateName()=='app.loginpage'||$ionicHistory.currentStateName()=='app.mainpage'){
                 ionic.Platform.exitApp();
             }else{
                 $ionicHistory.goBack();
@@ -79,6 +79,17 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/loginpage');
     })
+    /*.directive('imgAbort', function() { // 'imgLoad'
+    return {
+        restrict: 'A',
+        scope: {
+            loadHandler: '&imgAbort' // 'imgLoad'
+        },
+        link: function (scope, element, attr) {
+             element.on('abort', scope.loadHandler);
+            }
+       };
+    })*/
     .directive('standardTimeMeridian', function () {
         return {
             restrict: 'AE',

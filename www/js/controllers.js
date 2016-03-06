@@ -12,7 +12,6 @@ angular.module('starter.controllers', ['leaflet-directive'])
             return localStorage.getItem('user');
         }
         $scope.$watch(change, function () {
-            //console.log('changed');
             $scope.user = localStorage.getItem('user');
         })
     })
@@ -23,13 +22,9 @@ angular.module('starter.controllers', ['leaflet-directive'])
                 $state.go('app.mainpage');
             }
         })
-        // Form data for the login modal
         $scope.loginData = {};
-        // Perform the login action when the user submits the login form
         $scope.doLogin = function () {
             if ($scope.loginData.username == 'sail' && $scope.loginData.password == '17c01') {
-                // Simulate a login delay. Remove this and replace with your login
-                // code if using a login system
                 $timeout(function () {
                     $scope.err = '';
                     localStorage.setItem('user', $scope.loginData.username);
@@ -43,13 +38,47 @@ angular.module('starter.controllers', ['leaflet-directive'])
 
     .controller('MainpageCtrl', function ($scope, $state) {
         $scope.username = localStorage.getItem('user');
-        //console.log($scope.username);
         $scope.logout = function () {
             localStorage.removeItem('user');
             $state.go('app.loginpage');
         }
     })
-    .controller('ForecastCtrl', function ($scope) {
+    .controller('ForecastCtrl', function ($scope, $ionicScrollDelegate,Forecast) {
+        var enterCount = 0;//页面进入次数
+        $scope.$on('$ionicView.afterEnter', function () {
+            if (enterCount++ == 0)
+                $ionicScrollDelegate.$getByHandle('imgScroll').zoomTo(0.3);
+        });
+        /*$scope.imgAbort=function() {
+            console.log('Loading...');
+        }*/
+        $scope.modals = Forecast.getEcProductions();//获取Ec的产品分类数组][]
+        $scope.startDates = Forecast.getStartDates();//获取起始预报时间数组[]
+        $scope.forecastHours = Forecast.getForecastHours();//获取预报时效数组[]
+        $scope.forecastData = {
+            selectedModal: $scope.modals[1],
+            selectedStartDate: $scope.startDates[0],
+            selectedForecastHour: $scope.forecastHours[0]
+        };
+        $scope.imgUrl = Forecast.getImgUrl($scope.forecastData);
+        $scope.$watch('forecastData.selectedStartDate', function (newValue) {
+            $scope.imgUrl = Forecast.getImgUrl($scope.forecastData);
+        });
+        $scope.$watch('forecastData.selectedForecastHour', function (newValue) {
+            $scope.imgUrl = Forecast.getImgUrl($scope.forecastData);
+        });
+        $scope.$watch('forecastData.selectedModal', function (newValue) {
+            $scope.imgUrl = Forecast.getImgUrl($scope.forecastData);
+        });
+        /*
+        $scope.footerExpand = function () {
+             console.log('Footer expanded');
+         };
+         $scope.footerCollapse = function () {
+             console.log($scope.forecastData.selectedModal);
+             console.log('Footer collapsed');
+         };*/
+        
     })
     .controller('DsljCtrl',
         [
@@ -171,12 +200,12 @@ angular.module('starter.controllers', ['leaflet-directive'])
                 // Triggered in the physics modal to close it
                 $scope.closePhysics = function () {
                     $scope.modal.hide();
+                    event.stopPropagation();//阻止事件冒泡
                 };
 
                 // Open the physics modal
-                $scope.physics = function (event) {
+                $scope.physics = function () {
                     $scope.modal.show();
-                    event.stopPropagation();//阻止事件冒泡
                 };
                 var isRadarShown = true;
                 // Perform the physics action when the user submits the physics form
@@ -435,13 +464,14 @@ angular.module('starter.controllers', ['leaflet-directive'])
                 $scope.doRefreshRadarList = function () {
                     $http.get("http://222.85.131.129:1081/radar", {
                         params: {
-                            radarlist: 'true'
+                            radarlist: 'true',
+                            radartype:'dl'
                         }
                     })
                         .success(function (data) {
                             $scope.physicsData.radarData.radarModel = data.radarlist[0];//纪录当前选中的雷达图片的时间
                             currentRadarModel = $scope.physicsData.radarData.radarModel;
-                            $scope.radarList = data.radarlist.slice(0,100);
+                            $scope.radarList = data.radarlist.slice(0, 100);
                         })
                         .error(function (err) { })
                         .finally(function () {
@@ -567,12 +597,13 @@ angular.module('starter.controllers', ['leaflet-directive'])
                         }).error(function (err) { });
                     $http.get("http://222.85.131.129:1081/radar", {
                         params: {
-                            radarlist: 'true'
+                            radarlist: 'true',
+                            radartype:'dl'
                         }
                     })
                         .success(function (data) {
                             $scope.physicsData.radarData.radarModel = data.radarlist[0];//纪录当前选中的雷达图片的时间
-                            $scope.radarList = data.radarlist.slice(0,100);
+                            $scope.radarList = data.radarlist.slice(0, 100);
                             radarLayer = addRadarImg(map, $scope.physicsData.radarData.radarModel);
 
                         }).error(function (err) { });
