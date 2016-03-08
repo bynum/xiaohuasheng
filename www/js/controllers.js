@@ -235,8 +235,8 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     })
                 };
                 function addRadarImg(leafletMap, radarModel) {
-                    var imageUrl = "http://222.85.131.129:1081/static/ywptPNG/" + radarModel.substring(0, 4) + "/" + radarModel.substring(0, 6) + "/" + radarModel.substring(0, 8) + "/radar/CR/" + radarModel + ".gif";
-                    var imageBounds = [[22.09, 102.22], [31.09, 111.22]];
+                    var imageUrl = "http://222.85.131.129:1081/static/ywptPNG/" + radarModel.substring(0, 4) + "/" + radarModel.substring(0, 6) + "/" + radarModel.substring(0, 8) + "/swan/MCR/" + radarModel + ".gif";
+                    var imageBounds = [[24, 103], [29.5, 110.5]];
                     currentRadarModel = radarModel;
                     return L.imageOverlay(imageUrl, imageBounds).addTo(leafletMap);
                 }
@@ -465,7 +465,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     $http.get("http://222.85.131.129:1081/radar", {
                         params: {
                             radarlist: 'true',
-                            radartype:'dl'
+                            radartype:'swan'
                         }
                     })
                         .success(function (data) {
@@ -598,7 +598,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     $http.get("http://222.85.131.129:1081/radar", {
                         params: {
                             radarlist: 'true',
-                            radartype:'dl'
+                            radartype:'swan'
                         }
                     })
                         .success(function (data) {
