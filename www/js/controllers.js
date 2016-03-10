@@ -43,7 +43,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
             $state.go('app.loginpage');
         }
     })
-    .controller('ForecastCtrl', function ($scope, $ionicScrollDelegate,Forecast) {
+    .controller('ForecastCtrl', function ($scope,$state, $ionicScrollDelegate, Forecast) {
         var enterCount = 0;//页面进入次数
         $scope.$on('$ionicView.afterEnter', function () {
             if (enterCount++ == 0)
@@ -70,6 +70,11 @@ angular.module('starter.controllers', ['leaflet-directive'])
         $scope.$watch('forecastData.selectedModal', function (newValue) {
             $scope.imgUrl = Forecast.getImgUrl($scope.forecastData);
         });
+        $scope.doRefresh = function () {
+            //$scope.startDates = Forecast.getStartDates();//获取起始预报时间数组[]
+            //console.log($state.currentState);
+            //$state.go('app.forecast', {}, {reload:true})
+        }
         /*
         $scope.footerExpand = function () {
              console.log('Footer expanded');
@@ -78,7 +83,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
              console.log($scope.forecastData.selectedModal);
              console.log('Footer collapsed');
          };*/
-        
+
     })
     .controller('DsljCtrl',
         [
@@ -123,10 +128,48 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     }); //apply 
                 };
                 /*******雷达选择页面 返回页面顶部业务********* */
-
+                /*******sidetabs事件********* */
+                $scope.tabCollapse = function (index) {
+                    switch (index) {
+                        case 0:
+                            for (var i = 0; i < hourData7Markers.length; i++) {
+                                hourData7Markers[i].options.icon.changeHourData7DisplayStatus($scope.physicsData.hourData7);
+                            };
+                            break;
+                        case 1:
+                            leafletData.getMap('mymap').then(function (map) {
+                                drawHourData2(map, $scope.hourData2Obj);
+                            });
+                            break;
+                        case 2:
+                            leafletData.getMap('mymap').then(function (map) {
+                                if ($scope.physicsData.radarData.radarShown) {
+                                    if (!isRadarShown) {
+                                        radarLayer = addRadarImg(map, $scope.physicsData.radarData.radarModel);
+                                    }
+                                    else {
+                                        if ($scope.physicsData.radarData.radarModel != currentRadarModel) {
+                                            map.removeLayer(radarLayer);
+                                            radarLayer = addRadarImg(map, $scope.physicsData.radarData.radarModel);
+                                        }
+                                    }
+                                }
+                                else {
+                                    if (isRadarShown) {
+                                        map.removeLayer(radarLayer);
+                                    }
+                                }
+                                isRadarShown = $scope.physicsData.radarData.radarShown;
+                                drawHourData2(map, $scope.hourData2Obj);
+                            });
+                        default:
+                            break;
+                    }
+                };
+                /*******sidetabs事件********* */
                 var currentRadarModel = "";
                 var radarLayer = null;
-                $scope.physicsTitle = "国家站";
+                /*$scope.physicsTitle = "国家站";
                 $scope.slideChanged = function () {
                     $scope.currSlide = $ionicSlideBoxDelegate.currentIndex();
                     switch ($scope.currSlide) {
@@ -148,7 +191,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                             }
                             break;
                     }
-                };
+                };*/
                 $scope.$on('$ionicView.afterEnter', function () {
                     document.getElementById('btnTimePicker').nextSibling.style.display = 'none';
                     leafletData.getMap('mymap').then(function (map) {
@@ -182,14 +225,21 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     hourData2: {
                         r1h: true,
                         id2: false,
-                        name2: false
+                        name2: false,
+                        sumRain: false,
+                        startTime: "",
+                        endTime: ""
                     },
                     radarData: {
                         radarShown: true,
                         radarModel: ""
                     }
                 };
-   
+                var isRadarShown = true;
+                $scope.doSumRain = function () {
+
+                }
+                /*
                 // Create the physics modal that we will use later
                 $ionicModal.fromTemplateUrl('templates/physics.html', {
                     scope: $scope,
@@ -202,12 +252,10 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     $scope.modal.hide();
                     event.stopPropagation();//阻止事件冒泡
                 };
-
                 // Open the physics modal
                 $scope.physics = function () {
                     $scope.modal.show();
                 };
-                var isRadarShown = true;
                 // Perform the physics action when the user submits the physics form
                 $scope.doPhysics = function () {
                     for (var i = 0; i < hourData7Markers.length; i++) {
@@ -233,7 +281,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                         isRadarShown = $scope.physicsData.radarData.radarShown;
                         drawHourData2(map, $scope.hourData2Obj);
                     })
-                };
+                };*/
                 function addRadarImg(leafletMap, radarModel) {
                     var imageUrl = "http://222.85.131.129:1081/static/ywptPNG/" + radarModel.substring(0, 4) + "/" + radarModel.substring(0, 6) + "/" + radarModel.substring(0, 8) + "/swan/MCR/" + radarModel + ".gif";
                     var imageBounds = [[24, 103], [29.5, 110.5]];
@@ -465,7 +513,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     $http.get("http://222.85.131.129:1081/radar", {
                         params: {
                             radarlist: 'true',
-                            radartype:'swan'
+                            radartype: 'swan'
                         }
                     })
                         .success(function (data) {
@@ -523,10 +571,11 @@ angular.module('starter.controllers', ['leaflet-directive'])
                 angular.extend($scope, {
                     defaults: {
                         minZoom: 6,
-                        maxZoom: 12
+                        maxZoom: 12,
+                        zoomControl: false
                     },
                     guizhou: {
-                        lat: 27,
+                        lat: 26.7,
                         lng: 106.71,
                         zoom: 7,
                         minZoom: 6
@@ -598,7 +647,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     $http.get("http://222.85.131.129:1081/radar", {
                         params: {
                             radarlist: 'true',
-                            radartype:'swan'
+                            radartype: 'swan'
                         }
                     })
                         .success(function (data) {

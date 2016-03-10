@@ -171,8 +171,7 @@ angular.module('ionic-pullup', [])
           restrict: 'AE',
           require: '^ionPullUpFooter',
           link: function (scope, element, attrs, controller) {
-              var
-                footerHeight = controller.getHeight();
+              var footerHeight = controller.getHeight();
               element.css({'display': 'block', 'margin-top': footerHeight + 'px', width: '100%'});
               // add scrolling if needed
               if (attrs.scroll && attrs.scroll.toUpperCase() == 'TRUE') {
@@ -214,7 +213,7 @@ angular.module('ionic-pullup', [])
                 toggleClasses = attrs.toggle;
 
               controller.setHandleHeight(height);
-
+              
               element.css({
                   display: 'block',
                   background: background,
@@ -225,7 +224,7 @@ angular.module('ionic-pullup', [])
                   width: width + 'px',
                   'text-align': 'center'
                   });
-
+               
               // add gesture
               $ionicGesture.on('tap', controller.onTap, element);
               $ionicGesture.on('drag dragstart dragend', controller.onDrag, element);

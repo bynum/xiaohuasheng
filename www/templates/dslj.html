@@ -12,19 +12,179 @@
         <button class="button button-clear"></button>
     </ion-nav-buttons>
     <ion-content data-tap-disabled="true" scroll='false'>
-        <div class="button-bar positive">
-
-        </div>
-        <leaflet style="height:100%;width:100%;" id="mymap" lf-center="guizhou" layers="layers" geojson="geojson"
-        defaults="defaults"></leaflet>
+        <leaflet style="height:100%;width:100%;" id="mymap" lf-center="guizhou" layers="layers" geojson="geojson" defaults="defaults"></leaflet>
         <div class="bar bar-footer">
-            <div class="button-bar">
+            <!--<div class="button-bar">
                 <button class="button button-clear button-positive icon ion-arrow-left-c" ng-click="doHourChange(-1)"></button>
                 <button class="button button-clear button-positive icon ion-arrow-right-c" ng-click="doHourChange(1)"></button>
                 <button class="button button-clear button-positive icon ion-refresh" ng-click="doRefresh()"></button>
                 <button class="button button-clear button-positive icon ion-location" ng-click="centerMap()"></button>
                 <button class="button button-clear button-positive icon ion-navicon-round" ng-click="physics()"></button>
+            </div>-->
+            <div class="button-bar">
+                <button class="button button-clear button-positive icon ion-location" ng-click="centerMap()"></button>
+                <button class="button button-clear button-positive icon ion-refresh" ng-click="doRefresh()"></button>
+                <button class="button button-clear button-positive icon ion-arrow-left-c" ng-click="doHourChange(-1)"></button>
+                <button class="button button-clear button-positive icon ion-arrow-right-c" ng-click="doHourChange(1)"></button>
             </div>
         </div>
     </ion-content>
+    <ion-side-tabs on-expand="tabExpand(index)" on-collapse="tabCollapse(index)">
+        <ion-side-tab class="positive-bg" style="border-radius: 10px;">
+            <ion-side-tab-handle width="40" height="50" class="positive-bg" style="border-radius: 10px 0 0 10px;box-shadow: 0px 2px 1px #ddd">7</ion-side-tab-handle>
+            <ion-scroll class="list" style="height:100%">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.tem" />
+                    </label>
+                    温度
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.wind" />
+                    </label>
+                    风场
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.point" />
+                    </label>
+                    站点
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.name" />
+                    </label>
+                    站名
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.id" />
+                    </label>
+                    站号
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.prs" />
+                    </label>
+                    气压
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.dpt" />
+                    </label>
+                    露点
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.rh" />
+                    </label>
+                    湿度
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.pre1h" />
+                    </label>
+                    1h雨量
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.gst" />
+                    </label>
+                    地面温度
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.vis" />
+                    </label>
+                    能见度
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.prs24h" />
+                    </label>
+                    24h变压
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.prs3h" />
+                    </label>
+                    3h变压
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.tem24h" />
+                    </label>
+                    24h变温
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.temmax24" />
+                    </label>
+                    24h最高温度
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.temmin24" />
+                    </label>
+                    24h最低温度
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData7.pre24h" />
+                    </label>
+                    24h雨量
+                </li>
+                <li class="item item-divide"></li>
+            </ion-scroll>
+        </ion-side-tab>
+        <ion-side-tab class="dark-bg" style="border-radius: 10px;">
+            <ion-side-tab-handle width="40" height="50" class="dark-bg stable" style="border-radius: 10px 0 0 10px; box-shadow: 0px 2px 1px">2</ion-side-tab-handle>
+            <ion-scroll style="height:100%" class="list">
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData2.r1h" />
+                    </label>
+                    1h雨量
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData2.id2" />
+                    </label>
+                    站号
+                </li>
+                <li class="item item-checkbox">
+                    <label class="checkbox">
+                        <input type="checkbox" ng-model="physicsData.hourData2.name2" />
+                    </label>
+                    站名
+                </li>
+                <!--<ion-toggle class="item" ng-model="physicsData.hourData2.sumRain" toggle-class="toggle-positive">雨量统计</ion-toggle>
+                <label ng-show="physicsData.hourData2.sumRain" class="item item-input">
+                    <input ng-model="physicsData.hourData2.startTime" type="text" placeholder="开始时间">
+                </label>
+                <label ng-show="physicsData.hourData2.sumRain" class="item item-input">
+                    <input ng-model="physicsData.hourData2.endTime" type="text" placeholder="结束时间">
+                </label>
+                <button ng-show="physicsData.hourData2.sumRain" ng-click="doSumRain()" class="button">统计</button>-->
+            </ion-scroll>
+        </ion-side-tab>
+        <ion-side-tab class="assertive-bg" style="border-radius: 10px;">
+            <ion-side-tab-handle height="50" class="assertive-bg" style="border-radius: 10px 0 0 10px; box-shadow: 0px 2px 1px">R</ion-side-tab-handle>
+            <ion-toggle ng-model="physicsData.radarData.radarShown" toggle-class="toggle-positive">雷达</ion-toggle>
+            <ion-scroll delegate-handle="radarScroll" style="height:100%" class="list" on-scroll="getScrollPosition()">
+                <ion-refresher pulling-text="下拉刷新。。。" on-refresh="doRefreshRadarList()">
+                </ion-refresher>
+                <ion-radio class="item" ng-repeat="radar in radarList" ng-model="physicsData.radarData.radarModel" ng-value="radar">{{radar}}</ion-radio>
+                <ion-item class="item-devide"></ion-item>
+            </ion-scroll>
+            <div class="float-button" ng-show="sttButton" ng-click="scrollToTop()">
+                <span class="height-fix">
+               <a class="content">
+                  <i class="ion-ios-arrow-up"> </i>
+               </a>
+           </span>
+            </div>
+        </ion-side-tab>
+    </ion-side-tabs>
 </ion-view>

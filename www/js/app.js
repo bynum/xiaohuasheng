@@ -1,5 +1,5 @@
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker','morphCarousel',,'ionic-pullup'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker','morphCarousel','ionic-sidetabs','ionic-pullup'])
 
     .run(function ($ionicPlatform,$ionicHistory) {
         $ionicPlatform.ready(function () {
