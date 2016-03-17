@@ -1,5 +1,5 @@
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker','morphCarousel','ionic-sidetabs','ionic-pullup'])
+angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker','ionic-sidetabs','ionic-pullup','aCarousel'])
 
     .run(function ($ionicPlatform,$ionicHistory) {
         $ionicPlatform.ready(function () {
@@ -79,17 +79,6 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/loginpage');
     })
-    /*.directive('imgAbort', function() { // 'imgLoad'
-    return {
-        restrict: 'A',
-        scope: {
-            loadHandler: '&imgAbort' // 'imgLoad'
-        },
-        link: function (scope, element, attr) {
-             element.on('abort', scope.loadHandler);
-            }
-       };
-    })*/
     .directive('standardTimeMeridian', function () {
         return {
             restrict: 'AE',
@@ -171,6 +160,27 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
                     scope.stime = epochParser(scope.etime, 'time');
                 });
 
+            }
+        };
+    })
+    .directive('imageonload', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                element.bind('load', function() {
+                    //call the function that was passed
+                    scope.$apply(attrs.imageonload);
+                });
+            }
+        };
+    }).directive('imageonerror', function() {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                element.bind('error', function() {
+                    //call the function that was passed
+                    scope.$apply(attrs.imageonerror);
+                });
             }
         };
     });

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.guizhoumeteorology.xiaohuasheng" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.guizhoumeteorology.xiaohuasheng" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>小花生气象</name>
   <description>
-        贵州省气象台短临平台App
+        贵州省气象台短临平台移动客户端
     </description>
   <author email="601587314@qq.com" href="http://www.52yefei.com/">
       Li Tianjiang

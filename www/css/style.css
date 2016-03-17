@@ -14,7 +14,7 @@ background-color:#303f9f;
   background: red;
   position: fixed;
   bottom: 50px; /* Adjust height */
-  right: 0px; /* Adjust position */
+  right: 50px; /* Adjust position */
   z-index: 1000;
 }
 
