@@ -1,8 +1,8 @@
 
-angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker','ionic-sidetabs','ionic-pullup','aCarousel'])
-
-    .run(function ($ionicPlatform,$ionicHistory) {
-        $ionicPlatform.ready(function () {
+angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'ionic-datepicker', 'ionic-timepicker', 'ionic-sidetabs', 'ionic-pullup', 'aCarousel'])
+    
+    .run(function($ionicPlatform, $ionicHistory) {
+        $ionicPlatform.ready(function() {
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
                 cordova.plugins.Keyboard.disableScroll(true);
@@ -12,16 +12,16 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
                 StatusBar.styleDefault();
             }
         });
-        $ionicPlatform.registerBackButtonAction(function () {
-            if($ionicHistory.currentStateName()=='app.loginpage'||$ionicHistory.currentStateName()=='app.mainpage'){
+        $ionicPlatform.registerBackButtonAction(function() {
+            if ($ionicHistory.currentStateName() == 'app.loginpage' || $ionicHistory.currentStateName() == 'app.mainpage') {
                 ionic.Platform.exitApp();
-            }else{
+            } else {
                 $ionicHistory.goBack();
             }
-        },101)
+        }, 101)
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
 
             .state('app', {
@@ -79,7 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/loginpage');
     })
-    .directive('standardTimeMeridian', function () {
+    .directive('standardTimeMeridian', function() {
         return {
             restrict: 'AE',
             replace: true,
@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
                 etime: '=etime'
             },
             template: "<strong>{{stime}}</strong>",
-            link: function (scope, elem, attrs) {
+            link: function(scope, elem, attrs) {
 
                 scope.stime = epochParser(scope.etime, 'time');
 
@@ -116,7 +116,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
                     }
                 }
 
-                scope.$watch('etime', function (newValue, oldValue) {
+                scope.$watch('etime', function(newValue, oldValue) {
                     scope.stime = epochParser(scope.etime, 'time');
                 });
 
@@ -124,7 +124,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
         };
     })
 
-    .directive('standardTimeNoMeridian', function () {
+    .directive('standardTimeNoMeridian', function() {
         return {
             restrict: 'AE',
             replace: true,
@@ -132,7 +132,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
                 etime: '=etime'
             },
             template: "<strong>{{stime}}</strong>",
-            link: function (scope, elem, attrs) {
+            link: function(scope, elem, attrs) {
 
                 scope.stime = epochParser(scope.etime, 'time');
 
@@ -156,7 +156,7 @@ angular.module('starter', ['ionic', 'starter.controllers','starter.services', 'i
                     }
                 }
 
-                scope.$watch('etime', function (newValue, oldValue) {
+                scope.$watch('etime', function(newValue, oldValue) {
                     scope.stime = epochParser(scope.etime, 'time');
                 });
 
