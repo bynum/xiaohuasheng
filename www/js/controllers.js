@@ -315,7 +315,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                         params: {
                             appid: "gPLABtjfWDgNj677871",
                             time: timeStr,
-                            datasource: "sql",
+                            datasource: "cimiss",
                             datatype: "hourdata7"
                         }
                     })
@@ -352,7 +352,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                         params: {
                             appid: "gPLABtjfWDgNj677871",
                             time: timeStr,
-                            datasource: "sql",
+                            datasource: "cimiss",
                             datatype: "hourrain"
                         }
                     })
@@ -572,7 +572,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     params: {
                         appid: "gPLABtjfWDgNj677871",
                         time: getCurrentTimeShort(),
-                        datasource: "sql",
+                        datasource: "cimiss",
                         datatype: "hourdata7"
                     }
                 })
@@ -627,7 +627,7 @@ angular.module('starter.controllers', ['leaflet-directive'])
                     params: {
                         appid: "gPLABtjfWDgNj677871",
                         time: getCurrentTimeShort(),
-                        datasource: "sql",
+                        datasource: "cimiss",
                         datatype: "hourrain"
                     }
                 })
